@@ -43,7 +43,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (this.mMovie != null) {
             textTitle.setText(mMovie.title);
             textRate.setText(String.valueOf(mMovie.voteAverage));
-            textReleaseDate.setText(DateUtils.convertMovieReleaseDate(mMovie.releaseDate));
+            textReleaseDate.setText(getString(R.string.release_date, DateUtils.convertMovieReleaseDate(mMovie.releaseDate)));
             textDescription.setText(mMovie.overview);
 
             final String posterUrl = POSTER_BASE_URL + mMovie.posterPath;
