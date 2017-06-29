@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PopularMovies</string>
+    <string name="error_message">Failed To Fetching Movies</string>
+    <string name="menu_popular">Sort by Popular Movie</string>
+    <string name="menu_toprate">Sort by Top Rated Movie</string>
+    <string name="img_desc_poster">Movie Description</string>
+
+
+    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
+    <string name="checkin">Checkin</string>
+
+    <string name="menu_night_mode">Night mode</string>
+    <string name="menu_night_mode_system">Follow system</string>
+    <string name="menu_night_mode_day">Day (always)</string>
+    <string name="menu_night_mode_night">Night (always)</string>
+    <string name="menu_night_mode_auto">Auto</string>
+    <string name="release_date">Release Date : $%s1</string>
+    <string name="rating">rating</string>
+</resources>
