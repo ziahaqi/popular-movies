@@ -1,9 +1,7 @@
-package net.ziahaqi.udacity.movies.presenter;
+package net.ziahaqi.udacity.movies.view.movielist;
 
 import net.ziahaqi.udacity.movies.model.Movie;
 import net.ziahaqi.udacity.movies.repositories.MovieRepository;
-import net.ziahaqi.udacity.movies.view.movielist.MovieListActivity;
-import net.ziahaqi.udacity.movies.view.movielist.MovieListView;
 
 import java.util.List;
 
@@ -36,6 +34,8 @@ public class MovieListPresenter {
 
         if (sortedBy == MovieListActivity.SORTED_BY_POPULAR) {
             observableMovies = mRepository.getPopularMovie();
+        } else if (sortedBy == MovieListActivity.SORTED_BY_FAVORITED) {
+            observableMovies = mRepository.getFavoriteMovies();
         } else {
             observableMovies = mRepository.getTopRatedMovie();
         }

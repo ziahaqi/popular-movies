@@ -17,9 +17,8 @@ import net.ziahaqi.udacity.movies.R;
 import net.ziahaqi.udacity.movies.model.Movie;
 import net.ziahaqi.udacity.movies.network.ApiBuilder;
 import net.ziahaqi.udacity.movies.network.MovieService;
-import net.ziahaqi.udacity.movies.presenter.MovieListPresenter;
 import net.ziahaqi.udacity.movies.repositories.MovieRepository;
-import net.ziahaqi.udacity.movies.repositories.NetworkMovieRepository;
+import net.ziahaqi.udacity.movies.repositories.MovieRepositoryImpl;
 import net.ziahaqi.udacity.movies.view.moviedetails.MovieDetailActivity;
 
 import java.util.List;
@@ -29,6 +28,8 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
 
     public static final int SORTED_BY_POPULAR = 1;
     public static final int SORTED_BY_TOP_RATED = 2;
+    public static final int SORTED_BY_FAVORITED = 3;
+
     private static final int COLUMN_NUMBER = 2;
 
     SwipeRefreshLayout refreshLayout;
@@ -71,6 +72,11 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
                 selectedSort = SORTED_BY_TOP_RATED;
                 fetchMovies();
                 break;
+
+            case R.id.menu_favorited:
+                selectedSort = SORTED_BY_FAVORITED;
+                fetchMovies();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -83,7 +89,7 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
     private void initProperties() {
         setSupportActionBar(mToobar);
         mMovieDbService = ApiBuilder.createMovieService();
-        mMovieRepository = new NetworkMovieRepository(mMovieDbService);
+        mMovieRepository = new MovieRepositoryImpl(mMovieDbService, getContentResolver());
         mPresenter = new MovieListPresenter(this, mMovieRepository);
         mAdapter = new MovieListAdapter(this);
 

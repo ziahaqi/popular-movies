@@ -44,15 +44,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/image_poster"
-        android:layout_width="130dp"
-        android:layout_height="180dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|left|start"
-        tools:src="@mipmap/ic_launcher" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -63,13 +54,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/image_poster"
+                android:layout_width="130dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_anchorGravity="bottom|left|start"
+                tools:src="@mipmap/ic_launcher" />
+
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="160dp"
-                android:layout_marginStart="160dp"
                 android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/image_poster"
+                android:layout_toRightOf="@id/image_poster"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:text="title" />
@@ -79,9 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_title"
-                android:layout_marginLeft="160dp"
-                android:layout_marginStart="160dp"
                 android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/image_poster"
+                android:layout_toRightOf="@id/image_poster"
                 android:textColor="@color/black"
                 tools:text="@string/release_date" />
 
@@ -91,10 +92,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_release_date"
                 android:layout_marginEnd="16dp"
-                android:layout_marginLeft="160dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginStart="160dp"
                 android:layout_marginTop="8dp"
+                android:layout_toEndOf="@id/image_poster"
+                android:layout_toRightOf="@id/image_poster"
                 android:drawableLeft="@drawable/ic_rate"
                 android:drawablePadding="8dp"
                 android:drawableStart="@drawable/ic_rate"
@@ -106,7 +107,7 @@
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/tv_rating"
+                android:layout_below="@id/image_poster"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
@@ -120,8 +121,72 @@
                 android:layout_margin="16dp"
                 android:textColor="@color/black"
                 tools:text="@string/cheese_ipsum" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/tv_description"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#000" />
+
+            <TextView
+                android:id="@+id/tv_trailers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line2"
+                android:layout_margin="16dp"
+                android:text="Trailers"
+                android:textColor="#000"
+                android:textSize="16dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvTrailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_trailers"
+                android:layout_margin="16dp" />
+
+            <!-- Review -->
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/rvTrailers"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#000" />
+
+            <TextView
+                android:id="@+id/tv_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line3"
+                android:layout_margin="16dp"
+                android:text="Review"
+                android:textColor="#000"
+                android:textSize="16dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_review"
+                android:layout_margin="16dp" />
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_favorite"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_favorite_border" />
 
 </android.support.design.widget.CoordinatorLayout>

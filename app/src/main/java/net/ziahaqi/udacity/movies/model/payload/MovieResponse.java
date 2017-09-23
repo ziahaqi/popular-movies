@@ -1,4 +1,6 @@
-package net.ziahaqi.udacity.movies.model;
+package net.ziahaqi.udacity.movies.model.payload;
+
+import net.ziahaqi.udacity.movies.model.Movie;
 
 import java.util.List;
 
