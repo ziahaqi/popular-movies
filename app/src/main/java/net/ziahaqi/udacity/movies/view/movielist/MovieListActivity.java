@@ -21,6 +21,7 @@ import net.ziahaqi.udacity.movies.repositories.MovieRepository;
 import net.ziahaqi.udacity.movies.repositories.MovieRepositoryImpl;
 import net.ziahaqi.udacity.movies.view.moviedetails.MovieDetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListActivity extends AppCompatActivity implements MovieListView, SwipeRefreshLayout.OnRefreshListener,
@@ -31,6 +32,10 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
     public static final int SORTED_BY_FAVORITED = 3;
 
     private static final int COLUMN_NUMBER = 2;
+    private static final String LIST_POSITION = "list.position";
+    private static final String PAGE_POSITION = "pagePosition.position";
+    private static final String LIST_MOVIE = "list.movie";
+    private static final String LIST_STATE = "list.state";
 
     SwipeRefreshLayout refreshLayout;
     Toolbar mToobar;
@@ -43,6 +48,8 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
     private MovieListPresenter mPresenter;
     private MovieListAdapter mAdapter;
     private int selectedSort = SORTED_BY_POPULAR;
+    private int listPosition = 0;
+    private List<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +57,12 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
         setContentView(R.layout.activity_movie_list);
         bindViews();
         initProperties();
-        fetchMovies();
+
+        if (savedInstanceState == null) {
+            fetchMovies();
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,8 +103,6 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
         mMovieRepository = new MovieRepositoryImpl(mMovieDbService, getContentResolver());
         mPresenter = new MovieListPresenter(this, mMovieRepository);
         mAdapter = new MovieListAdapter(this);
-
-        mListMovies.setHasFixedSize(true);
         mListMovies.setLayoutManager(new GridLayoutManager(this, COLUMN_NUMBER));
         mListMovies.setAdapter(mAdapter);
     }
@@ -136,5 +145,40 @@ public class MovieListActivity extends AppCompatActivity implements MovieListVie
     protected void onDestroy() {
         mPresenter.detachView();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (mListMovies != null) {
+            outState.putInt(LIST_POSITION, mAdapter.getCurrentPosition());
+        }
+        if (mAdapter != null) {
+            outState.putParcelableArrayList(LIST_MOVIE, new ArrayList<>(mAdapter.getData()));
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            this.listPosition = savedInstanceState.getInt(LIST_POSITION);
+            this.movies = savedInstanceState.getParcelableArrayList(LIST_MOVIE);
+
+            if (movies != null) {
+                mListMovies.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mListMovies.scrollToPosition(listPosition);
+                    }
+                });
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

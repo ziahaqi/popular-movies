@@ -1,6 +1,7 @@
 package net.ziahaqi.udacity.movies.view.movielist;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,20 @@ import java.util.List;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieHolder> {
     private EventListener mListener;
     private List<Movie> movies;
+    private int currentPosition;
 
     public Movie getItem(int position) {
         return movies.get(position);
     }
+
+    public List<Movie> getData() {
+        return movies;
+    }
+
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
 
     public interface EventListener {
         void onClick(int position);
@@ -51,10 +62,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         return holder;
     }
 
+
     @Override
     public void onBindViewHolder(MovieHolder holder, int position) {
+        this.currentPosition = position;
         Movie movie = getItem(position);
+        Log.d("savedMovie", "set:position:" + currentPosition);
+
         final String posterUrl = "http://image.tmdb.org/t/p/w342/" + movie.posterPath;
+
         Glide.with(holder.itemView.getContext())
                 .load(posterUrl)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
